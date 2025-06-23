@@ -1,0 +1,11 @@
+<section class="bakery-page">
+  <div class="container">
+    <h1 class="page-title text-center my-5">Our Desserts & Bakery</h1>
+    
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4" *ngFor="let dessert of dessertProducts">
+        <app-product-card [product]="dessert"></app-product-card>
+      </div>
+    </div>
+  </div>
+</section>

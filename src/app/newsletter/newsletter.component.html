@@ -1,0 +1,12 @@
+<form class="newsletter-form" (ngSubmit)="subscribe()">
+  <div class="input-group mb-3">
+    <input 
+      type="email" 
+      class="form-control" 
+      placeholder="Email address" 
+      [(ngModel)]="email" 
+      name="email"
+      required>
+    <button class="btn btn-dark" type="submit">Subscribe</button>
+  </div>
+</form>

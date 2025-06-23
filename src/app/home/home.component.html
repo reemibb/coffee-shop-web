@@ -1,0 +1,108 @@
+<!-- Hero Section -->
+<section class="hero-section" [ngStyle]="getHeroBgImage()">
+  <div class="container">
+    <div class="row align-items-center justify-content-start">
+      <div class="col-md-6">
+        <h3 class="welcome-text">Welcome!</h3>
+        <h1 class="hero-title">We serve the richest coffee <br>in the city!</h1>
+        <button class="btn btn-primary order-btn" (click)="onOrderNowClick()">ORDER NOW</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The rest of the HTML remains unchanged -->
+
+
+
+<!-- Rest of the component remains unchanged -->
+<!-- Special Coffee Section -->
+<section class="special-section">
+  <div class="container">
+    <h2 class="section-title text-center">OUR SPECIAL COFFEE</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="position-relative">
+          <div class="row product-slider">
+            <div class="col-md-3 col-sm-6" *ngFor="let coffee of coffeeProducts">
+              <app-product-card [product]="coffee"></app-product-card>
+            </div>
+          </div>
+          <button class="carousel-control prev"><i class="bi bi-chevron-left"></i></button>
+          <button class="carousel-control next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Special Dessert Section -->
+<section class="special-section">
+  <div class="container">
+    <h2 class="section-title text-center">OUR SPECIAL DESSERT</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="position-relative">
+          <div class="row product-slider">
+            <div class="col-md-3 col-sm-6" *ngFor="let dessert of dessertProducts">
+              <app-product-card [product]="dessert"></app-product-card>
+            </div>
+          </div>
+          <button class="carousel-control prev"><i class="bi bi-chevron-left"></i></button>
+          <button class="carousel-control next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Best Coffee Beans Banner -->
+<section class="coffee-beans-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 mx-auto text-center">
+        <h2 class="mb-4">Check out our best coffee beans</h2>
+        <button class="btn btn-outline-dark">Explore our products <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title text-center">
+      <small>Come and join</small>
+      <br>OUR HAPPY CUSTOMERS
+    </h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="testimonial-slider">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let testimonial of testimonials.slice(0,3)">
+              <app-testimonial-card [testimonial]="testimonial"></app-testimonial-card>
+            </div>
+          </div>
+          <div class="carousel-indicators">
+            <button type="button" [class.active]="true" aria-current="true"></button>
+            <button type="button" [class.active]="false"></button>
+            <button type="button" [class.active]="false"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <h2 class="mb-4">Join in and get 15% Off!</h2>
+        <p>Subscribe to our newsletter and get 15% off your first order</p>
+        <app-newsletter></app-newsletter>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,4 @@
+.content-container {
+  padding-top: 76px; /* Height of the navbar */
+  min-height: calc(100vh - 300px); /* Adjust based on footer height */
+}

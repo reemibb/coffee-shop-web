@@ -1,0 +1,15 @@
+<div class="testimonial-card">
+  <div class="testimonial-user">
+    <div class="user-avatar">
+      <img [src]="testimonial.avatar" [alt]="testimonial.name">
+    </div>
+    <div class="user-info">
+      <h5 class="user-name">{{ testimonial.name }}</h5>
+      <p class="user-title">{{ testimonial.title }}</p>
+    </div>
+  </div>
+  <div class="rating">
+    <i *ngFor="let star of stars" class="bi bi-star-fill"></i>
+  </div>
+  <p class="testimonial-text">{{ testimonial.comment }}</p>
+</div>
