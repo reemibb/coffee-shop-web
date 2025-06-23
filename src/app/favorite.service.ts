@@ -60,9 +60,9 @@ export class FavoriteService {
   // Toggle product favorite status
   toggleFavorite(productId: number): Observable<boolean> {
     return this.authService.isLoggedIn().pipe(
-      map(isLoggedIn => {
+      switchMap(isLoggedIn => {
         if (!isLoggedIn) {
-          return false;
+          return of(false);
         }
         
         const userId = this.authService.getUserId();
@@ -78,19 +78,16 @@ export class FavoriteService {
         
         // Send update to the server
         const endpoint = isFavorited ? 'remove_favorite.php' : 'add_favorite.php';
-        this.http.post(`${this.apiUrl}/${endpoint}`, { user_id: userId, product_id: productId })
+        return this.http.post<{success: boolean}>(`${this.apiUrl}/${endpoint}`, { user_id: userId, product_id: productId })
           .pipe(
+            map(response => !isFavorited),
             catchError(error => {
               console.error('Error updating favorite status:', error);
               // Revert the optimistic update on error
               this.favoritesSubject.next(currentFavorites);
               return of(false);
             })
-          )
-          .subscribe();
-        
-        // Return the new status
-        return !isFavorited;
+          );
       })
     );
   }
@@ -106,6 +103,23 @@ export class FavoriteService {
         const userId = this.authService.getUserId();
         return this.http.get<any[]>(`${this.apiUrl}/favorite_products.php?user_id=${userId}`)
           .pipe(
+            map(products => {
+              // Standardize the format of product data to match what the product-card expects
+              return products.map(product => {
+                // Make sure imageUrl exists (normalization)
+                if (product.image_url && !product.imageUrl) {
+                  product.imageUrl = product.image_url;
+                } else if (product.img_url && !product.imageUrl) {
+                  product.imageUrl = product.img_url;
+                } else if (!product.imageUrl) {
+                  // Provide a default image if no image URL is found
+                  product.imageUrl = 'assets/images/default-product.jpg';
+                }
+                
+                return product;
+              });
+            }),
+            tap(products => console.log('Normalized favorite products:', products)),
             catchError(error => {
               console.error('Error fetching favorite products:', error);
               return of([]);

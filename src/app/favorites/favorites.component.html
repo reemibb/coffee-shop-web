@@ -7,7 +7,11 @@
     </div>
   </div>
   
-  <div *ngIf="!isLoading && favoriteProducts.length === 0" class="alert alert-info">
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="!isLoading && !errorMessage && favoriteProducts.length === 0" class="alert alert-info">
     You don't have any favorite products yet.
   </div>
   
