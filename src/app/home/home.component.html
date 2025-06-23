@@ -11,51 +11,6 @@
   </div>
 </section>
 
-<!-- The rest of the HTML remains unchanged -->
-
-
-
-<!-- Rest of the component remains unchanged -->
-<!-- Special Coffee Section -->
-<section class="special-section">
-  <div class="container">
-    <h2 class="section-title text-center">OUR SPECIAL COFFEE</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="position-relative">
-          <div class="row product-slider">
-            <div class="col-md-3 col-sm-6" *ngFor="let coffee of coffeeProducts">
-              <app-product-card [product]="coffee"></app-product-card>
-            </div>
-          </div>
-          <button class="carousel-control prev"><i class="bi bi-chevron-left"></i></button>
-          <button class="carousel-control next"><i class="bi bi-chevron-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Special Dessert Section -->
-<section class="special-section">
-  <div class="container">
-    <h2 class="section-title text-center">OUR SPECIAL DESSERT</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="position-relative">
-          <div class="row product-slider">
-            <div class="col-md-3 col-sm-6" *ngFor="let dessert of dessertProducts">
-              <app-product-card [product]="dessert"></app-product-card>
-            </div>
-          </div>
-          <button class="carousel-control prev"><i class="bi bi-chevron-left"></i></button>
-          <button class="carousel-control next"><i class="bi bi-chevron-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Best Coffee Beans Banner -->
 <section class="coffee-beans-banner">
   <div class="container">
@@ -68,6 +23,67 @@
   </div>
 </section>
 
+<!-- Special Coffee Section -->
+<section class="special-section">
+  <div class="container">
+    <h2 class="section-title text-center">OUR SPECIAL COFFEE</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="coffeeCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Group products in sets of 4 for desktop, 2 for tablet, 1 for mobile -->
+            <div class="carousel-item" *ngFor="let group of groupedCoffeeProducts; let i = index" [class.active]="i === 0">
+              <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4" *ngFor="let coffee of group">
+                  <app-product-card [product]="coffee"></app-product-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev carousel-control prev" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="prev">
+            <i class="bi bi-chevron-left"></i>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next carousel-control next" type="button" data-bs-target="#coffeeCarousel" data-bs-slide="next">
+            <i class="bi bi-chevron-right"></i>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Special Dessert Section -->
+<section class="special-section">
+  <div class="container">
+    <h2 class="section-title text-center">OUR SPECIAL DESSERT</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="dessertCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Group products in sets of 4 for desktop, 2 for tablet, 1 for mobile -->
+            <div class="carousel-item" *ngFor="let group of groupedDessertProducts; let i = index" [class.active]="i === 0">
+              <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4" *ngFor="let dessert of group">
+                  <app-product-card [product]="dessert"></app-product-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev carousel-control prev" type="button" data-bs-target="#dessertCarousel" data-bs-slide="prev">
+            <i class="bi bi-chevron-left"></i>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next carousel-control next" type="button" data-bs-target="#dessertCarousel" data-bs-slide="next">
+            <i class="bi bi-chevron-right"></i>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Newsletter Section -->
 <section class="newsletter-section">

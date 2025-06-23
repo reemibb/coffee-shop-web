@@ -83,28 +83,55 @@
   font-weight: 600;
 }
 
+/* Add or update these carousel-specific styles */
 .carousel-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
-  border: 1px solid #ddd;
   width: 40px;
   height: 40px;
+  background: #fff;
+  border: 1px solid #ddd;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  opacity: 1;
   z-index: 10;
+  color: #8c5e3b;
 }
 
-.prev {
+.carousel-control:hover {
+  background-color: #8c5e3b;
+  color: #fff;
+  border-color: #8c5e3b;
+}
+
+.carousel-control-prev {
   left: -20px;
 }
 
-.next {
+.carousel-control-next {
   right: -20px;
+}
+
+.carousel-control i {
+  font-size: 20px;
+}
+
+/* Make sure product cards are the same height */
+.carousel-item .product-card {
+  height: 100%;
+}
+
+/* Add some space between carousel items */
+.carousel-item {
+  padding: 10px 0;
+}
+
+/* Ensure the carousels don't make the page jump */
+#coffeeCarousel, #dessertCarousel {
+  min-height: 350px; /* Adjust this height based on your product cards */
 }
 
 /* Coffee Beans Banner */

@@ -4,6 +4,13 @@ import { ProductService } from '../product.service';
 import { ImageService, Image } from '../image.service';
 import { AuthService } from '../auth.service';
 
+// Add Bootstrap interface to Window object
+declare global {
+  interface Window {
+    bootstrap: any;
+  }
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,6 +20,8 @@ import { AuthService } from '../auth.service';
 export class HomeComponent implements OnInit, AfterViewInit {
   coffeeProducts: any[] = [];
   dessertProducts: any[] = [];
+  groupedCoffeeProducts: any[][] = [];
+  groupedDessertProducts: any[][] = [];
   categoryImages: { [key: string]: string } = {};
   bannerImages: { [key: string]: string } = {};
   debugInfo: string = '';
@@ -29,13 +38,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.productService.getSpecialCoffees().subscribe(data => {
       this.coffeeProducts = data;
       console.log('Coffee products loaded:', data);
+      this.groupedCoffeeProducts = this.chunkArray(data, 4); // Group by 4 items
     });
 
     this.productService.getSpecialDesserts().subscribe(data => {
       this.dessertProducts = data;
       console.log('Dessert products loaded:', data);
+      this.groupedDessertProducts = this.chunkArray(data, 4); // Group by 4 items
     });
-
 
     // Load images with detailed debugging
     console.log('About to call getAllImages()');
@@ -84,7 +94,51 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       console.log('Current hero image:', this.bannerImages['hero']);
       console.log('Current hero style:', this.getHeroBgImage());
+      
+      // Initialize Bootstrap carousels
+      this.initCarousels();
     }, 2000);
+  }
+
+  // Helper method to initialize Bootstrap carousels
+  initCarousels(): void {
+    // This would typically be done through Bootstrap's JavaScript
+    // If you're using Bootstrap 5, you can use the following:
+    if (typeof window !== 'undefined' && window.bootstrap) {
+      const coffeeCarouselEl = document.getElementById('coffeeCarousel');
+      const dessertCarouselEl = document.getElementById('dessertCarousel');
+      
+      if (coffeeCarouselEl) {
+        new window.bootstrap.Carousel(coffeeCarouselEl, {
+          interval: 5000,
+          wrap: true
+        });
+      }
+      
+      if (dessertCarouselEl) {
+        new window.bootstrap.Carousel(dessertCarouselEl, {
+          interval: 5000,
+          wrap: true
+        });
+      }
+    }
+  }
+
+  // Helper method to group array items into chunks
+  chunkArray(array: any[], size: number): any[][] {
+    if (!array) return [];
+    
+    // If using lodash:
+    // return chunk(array, size);
+    
+    // Custom implementation without lodash:
+    const chunkedArr = [];
+    let index = 0;
+    while (index < array.length) {
+      chunkedArr.push(array.slice(index, index + size));
+      index += size;
+    }
+    return chunkedArr;
   }
 
   // Helper methods to get image URLs safely
@@ -117,21 +171,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, null, 2);
   }
   
-  // Add this method to handle the "ORDER NOW" button click
-  // Add this method to handle the "ORDER NOW" button click
-onOrderNowClick(): void {
-  // Check if user is logged in
-  this.authService.isLoggedIn().subscribe(isLoggedIn => {
-    if (isLoggedIn) {
-      // User is logged in, navigate to the order page
-      this.router.navigate(['/order']);
-    } else {
-      // Store the current URL to redirect back after login
-      sessionStorage.setItem('returnUrl', '/order');
-      // User is not logged in, redirect to login page
-      this.router.navigate(['/login']);
-    }
-  });
-}
-  
+  // Handle the "ORDER NOW" button click
+  onOrderNowClick(): void {
+    // Check if user is logged in
+    this.authService.isLoggedIn().subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        // User is logged in, navigate to the order page
+        this.router.navigate(['/order']);
+      } else {
+        // Store the current URL to redirect back after login
+        sessionStorage.setItem('returnUrl', '/order');
+        // User is not logged in, redirect to login page
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 }
