@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   currentUser: any = null;
+  isDropdownOpen = false;
 
   constructor(
     private authService: AuthService,
@@ -29,8 +30,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  // Method to handle user logout
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
   }
+  toggleDropdown(): void {
+  this.isDropdownOpen = !this.isDropdownOpen;
+}
 }

@@ -58,3 +58,18 @@
     padding: 10px 0;
   }
 }
+/* Add this to your existing CSS */
+.bi-heart {
+  font-size: 1.2rem;
+  color: #4a3520;
+  transition: color 0.2s ease;
+}
+
+.bi-heart:hover {
+  color: #e25555; /* Heart turns red on hover */
+}
+
+/* Add this if you want to style the favorites button */
+.btn:focus {
+  box-shadow: none;
+}

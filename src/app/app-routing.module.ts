@@ -6,6 +6,7 @@ import { BakeryComponent } from './bakery/bakery.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { ShopComponent } from './shop/shop.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'shop', component: ShopComponent },
+  { path: 'favorites', component: FavoritesComponent },
   { path: '**', redirectTo: '' }
 ];
 

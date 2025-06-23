@@ -16,6 +16,7 @@ import { AboutComponent } from './about/about.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { TestimonialCardComponent } from './testimonial-card/testimonial-card.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
     AboutComponent,
     ProductCardComponent,
     TestimonialCardComponent,
-    NewsletterComponent
+    NewsletterComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

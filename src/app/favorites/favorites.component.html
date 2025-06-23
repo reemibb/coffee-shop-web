@@ -1,0 +1,19 @@
+<div class="container py-5 mt-5">
+  <h2 class="mb-4">Your Favorites</h2>
+  
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <div *ngIf="!isLoading && favoriteProducts.length === 0" class="alert alert-info">
+    You don't have any favorite products yet.
+  </div>
+  
+  <div *ngIf="!isLoading && favoriteProducts.length > 0" class="row g-4">
+    <div *ngFor="let product of favoriteProducts" class="col-md-6 col-lg-4">
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+  </div>
+</div>

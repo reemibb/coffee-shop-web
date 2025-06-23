@@ -71,4 +71,13 @@ export class AuthService {
     }
     return null;
   }
+  getUserId(): number | null {
+  if (this.isBrowser) {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user).id;
+    }
+  }
+  return null;
+}
 }
