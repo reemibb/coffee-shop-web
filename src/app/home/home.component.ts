@@ -13,7 +13,6 @@ import { AuthService } from '../auth.service';
 export class HomeComponent implements OnInit, AfterViewInit {
   coffeeProducts: any[] = [];
   dessertProducts: any[] = [];
-  testimonials: any[] = [];
   categoryImages: { [key: string]: string } = {};
   bannerImages: { [key: string]: string } = {};
   debugInfo: string = '';
@@ -37,10 +36,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       console.log('Dessert products loaded:', data);
     });
 
-    this.productService.getTestimonials().subscribe(data => {
-      this.testimonials = data;
-      console.log('Testimonials loaded:', data);
-    });
 
     // Load images with detailed debugging
     console.log('About to call getAllImages()');

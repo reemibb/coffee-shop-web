@@ -68,31 +68,6 @@
   </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="testimonials-section">
-  <div class="container">
-    <h2 class="section-title text-center">
-      <small>Come and join</small>
-      <br>OUR HAPPY CUSTOMERS
-    </h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="testimonial-slider">
-          <div class="row">
-            <div class="col-md-4" *ngFor="let testimonial of testimonials.slice(0,3)">
-              <app-testimonial-card [testimonial]="testimonial"></app-testimonial-card>
-            </div>
-          </div>
-          <div class="carousel-indicators">
-            <button type="button" [class.active]="true" aria-current="true"></button>
-            <button type="button" [class.active]="false"></button>
-            <button type="button" [class.active]="false"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Newsletter Section -->
 <section class="newsletter-section">

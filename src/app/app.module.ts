@@ -14,9 +14,14 @@ import { LoginComponent } from './login/login.component';
 import { ShopComponent } from './shop/shop.component';
 import { AboutComponent } from './about/about.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { TestimonialCardComponent } from './testimonial-card/testimonial-card.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { OrdersComponent } from './orders/orders.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +35,14 @@ import { FavoritesComponent } from './favorites/favorites.component';
     ShopComponent,
     AboutComponent,
     ProductCardComponent,
-    TestimonialCardComponent,
     NewsletterComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ProductDetailComponent,
+    CartComponent,
+    CheckoutComponent,
+    OrderConfirmationComponent,
+    OrdersComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,47 @@
+<div class="container py-5 mt-5">
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="!isLoading && !error && order" class="text-center">
+    <div class="confirmation-icon mb-4">
+      <i class="bi bi-check-circle-fill"></i>
+    </div>
+    
+    <h2 class="mb-4">Order Confirmed!</h2>
+    
+    <p class="lead mb-4">Thank you for your order. We've received your order and are getting it ready for you.</p>
+    
+    <div class="order-info mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="mb-2"><strong>Order Number:</strong> #{{ order.id }}</p>
+          <p class="mb-2"><strong>Order Date:</strong> {{ order.created_at | date:'medium' }}</p>
+          <p class="mb-2"><strong>Order Total:</strong> ${{ order.total }}</p>
+          <p class="mb-0"><strong>Status:</strong> 
+            <span class="badge" [ngClass]="{
+              'bg-warning': order.status === 'pending',
+              'bg-info': order.status === 'processing',
+              'bg-primary': order.status === 'shipped',
+              'bg-success': order.status === 'delivered',
+              'bg-danger': order.status === 'cancelled'
+            }">{{ order.status | titlecase }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <p class="mb-4">A confirmation email has been sent to your email address with order details.</p>
+    
+    <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+      <button class="btn btn-primary" (click)="viewOrderDetails()">View Order Details</button>
+      <button class="btn btn-outline-primary" (click)="continueShopping()">Continue Shopping</button>
+    </div>
+  </div>
+</div>

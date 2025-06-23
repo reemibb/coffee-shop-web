@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+import { FavoriteService } from '../favorite.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,9 +14,12 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   currentUser: any = null;
   isDropdownOpen = false;
+  cartQuantity = 0;
 
   constructor(
     private authService: AuthService,
+    private favoriteService: FavoriteService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -28,6 +33,9 @@ export class NavbarComponent implements OnInit {
     this.authService.getUser().subscribe(user => {
       this.currentUser = user;
     });
+    this.cartService.getCartQuantity().subscribe(quantity => {
+    this.cartQuantity = quantity;
+  });
   }
 
   // Method to handle user logout

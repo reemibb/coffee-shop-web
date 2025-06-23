@@ -35,19 +35,26 @@
             {{ currentUser?.name || 'PROFILE' }}
           </a>
           <ul class="dropdown-menu" [class.show]="isDropdownOpen" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
             <li><a class="dropdown-item" routerLink="/orders">My Orders</a></li>
-            
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a></li>
           </ul>
         </li>
       </ul>
-      <form class="d-flex">
-        <button class="btn" type="button" routerLink="/favorites">
+      <div class="d-flex">
+        <!-- Favorites Button -->
+        <button class="btn me-2" type="button" routerLink="/favorites">
           <i class="bi bi-heart"></i>
         </button>
-      </form>
+        
+        <!-- Cart Button -->
+        <button class="btn position-relative" type="button" routerLink="/cart">
+          <i class="bi bi-cart"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="cartQuantity > 0">
+            {{ cartQuantity }}
+          </span>
+        </button>
+      </div>
     </div>
   </div>
 </nav>

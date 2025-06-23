@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FavoriteService } from '../favorite.service';
+import { CartService } from '../cart.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,6 +19,7 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private favoriteService: FavoriteService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -61,17 +63,20 @@ export class ProductCardComponent implements OnInit {
   
   // Method to handle the Order Now button click
   onOrderNowClick(): void {
-    // Check if user is logged in
-    this.authService.isLoggedIn().subscribe(isLoggedIn => {
-      if (isLoggedIn) {
-        // User is logged in, navigate to the product detail or order page
-        this.router.navigate(['/product', this.product.id]);
-      } else {
-        // Store the current URL to redirect back after login
-        sessionStorage.setItem('returnUrl', `/product/${this.product.id}`);
-        // User is not logged in, redirect to login page
-        this.router.navigate(['/login']);
-      }
-    });
+    // Simply add to cart with default options
+    this.cartService.addToCart(this.product, 1);
+    
+    // Show a quick notification using alert (you might want to replace with a toast)
+    alert(`${this.product.name} added to cart!`);
+    
+    // Alternatively, navigate to the product detail page
+    // this.router.navigate(['/product', this.product.id]);
+    
+    // Or navigate directly to cart
+    // this.cartService.navigateToCheckout();
+  }
+  
+  viewProductDetails(): void {
+    this.router.navigate(['/product', this.product.id]);
   }
 }

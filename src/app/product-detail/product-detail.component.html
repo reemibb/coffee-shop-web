@@ -1,0 +1,98 @@
+<div class="container py-5 mt-5">
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="!isLoading && !error && product" class="row">
+    <!-- Product Image -->
+    <div class="col-md-6">
+      <div class="product-image-container">
+        <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid rounded">
+        <button class="favorite-btn" (click)="toggleFavorite()">
+          <i class="bi" [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Product Details -->
+    <div class="col-md-6">
+      <h2 class="product-title mb-3">{{ product.name }}</h2>
+      <p class="product-description mb-4">{{ product.description }}</p>
+      
+      <div class="price-box mb-4">
+        <span class="price">${{ product.price }}</span>
+      </div>
+      
+      <!-- Options Section -->
+      <div class="options-section mb-4" *ngIf="product.category === 'coffee'">
+        <h5>Select Options</h5>
+        
+        <!-- Size Options -->
+        <div class="form-group mb-3">
+          <label class="mb-2">Size</label>
+          <div class="btn-group d-block">
+            <button type="button" class="btn" 
+                    [class.btn-outline-primary]="selectedOptions.size !== 'small'"
+                    [class.btn-primary]="selectedOptions.size === 'small'"
+                    (click)="selectedOptions.size = 'small'">Small</button>
+            <button type="button" class="btn" 
+                    [class.btn-outline-primary]="selectedOptions.size !== 'medium'"
+                    [class.btn-primary]="selectedOptions.size === 'medium'"
+                    (click)="selectedOptions.size = 'medium'">Medium</button>
+            <button type="button" class="btn" 
+                    [class.btn-outline-primary]="selectedOptions.size !== 'large'"
+                    [class.btn-primary]="selectedOptions.size === 'large'"
+                    (click)="selectedOptions.size = 'large'">Large</button>
+          </div>
+        </div>
+        
+        <!-- Milk Options -->
+        <div class="form-group mb-3">
+          <label class="mb-2">Milk</label>
+          <select class="form-select" [(ngModel)]="selectedOptions.milk">
+            <option value="regular">Regular Milk</option>
+            <option value="skim">Skim Milk</option>
+            <option value="almond">Almond Milk</option>
+            <option value="oat">Oat Milk</option>
+            <option value="soy">Soy Milk</option>
+          </select>
+        </div>
+        
+        <!-- Sugar Options -->
+        <div class="form-group mb-3">
+          <label class="mb-2">Sugar</label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="selectedOptions.sugar" id="sugar">
+            <label class="form-check-label" for="sugar">Add Sugar</label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quantity Selector -->
+      <div class="quantity-selector mb-4">
+        <h5>Quantity</h5>
+        <div class="input-group">
+          <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity()">
+            <i class="bi bi-dash"></i>
+          </button>
+          <input type="number" class="form-control text-center" [(ngModel)]="quantity" min="1">
+          <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity()">
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="d-grid gap-2 d-md-flex">
+        <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        <button class="btn btn-outline-primary" (click)="buyNow()">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
