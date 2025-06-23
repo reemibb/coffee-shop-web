@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,23 @@ export class AuthService {
   private apiUrl = 'http://localhost/coffee-php';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<any>(null);
+  private isBrowser: boolean;
 
-  constructor(private http: HttpClient) { 
-    // Check if user is already logged in
-    const user = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) { 
+    this.isBrowser = isPlatformBrowser(platformId);
     
-    if (user && token) {
-      this.isLoggedInSubject.next(true);
-      this.userSubject.next(JSON.parse(user));
+    // Check if user is already logged in - only in browser environment
+    if (this.isBrowser) {
+      const user = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+      
+      if (user && token) {
+        this.isLoggedInSubject.next(true);
+        this.userSubject.next(JSON.parse(user));
+      }
     }
   }
 
@@ -25,7 +34,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/auth.php`, { email, password, action: 'login' })
       .pipe(
         tap(response => {
-          if (response.success) {
+          if (response.success && this.isBrowser) {
             localStorage.setItem('token', response.token);
             localStorage.setItem('user', JSON.stringify(response.user));
             this.isLoggedInSubject.next(true);
@@ -40,8 +49,10 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    if (this.isBrowser) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
     this.isLoggedInSubject.next(false);
     this.userSubject.next(null);
   }
@@ -55,6 +66,9 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (this.isBrowser) {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 }

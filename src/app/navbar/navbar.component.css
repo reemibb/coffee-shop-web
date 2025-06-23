@@ -25,6 +25,30 @@
   align-items: center;
 }
 
+/* Dropdown styles */
+.dropdown-menu {
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border: none;
+  padding: 0.5rem 0;
+}
+
+.dropdown-item {
+  color: #4a3520;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: rgba(140, 94, 59, 0.1);
+  color: #8c5e3b;
+}
+
+.dropdown-divider {
+  margin: 0.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 992px) {
   .navbar-nav {
     padding: 10px 0;

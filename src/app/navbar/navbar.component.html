@@ -26,8 +26,20 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active">ABOUT</a>
         </li>
-        <li class="nav-item">
+        <!-- Conditional display based on login status -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">LOGIN</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ currentUser?.name || 'PROFILE' }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/orders">My Orders</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a></li>
+          </ul>
         </li>
       </ul>
       <form class="d-flex">
