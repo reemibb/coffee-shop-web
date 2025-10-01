@@ -60,4 +60,8 @@ For more information on using the Angular CLI, including detailed command refere
 
 ## Project Details
 
-A coffee shop website. Organized as efficiently and smoothly as possible using angular and typescript. coffee-shop-db is the website's local database using xampp and php.
+A coffee shop website. Organized as efficiently and smoothly as possible using angular and typescript. [coffee-shop-db](https://github/reemibb/coffee-shop-db) is the website's local database using xampp and php.
+
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
